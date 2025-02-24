@@ -61,7 +61,7 @@ public class PCPlayerMovementController : MonoBehaviour
         Vector3 moveDirection = transform.right * inputHandler.MovementInput.x +
                               transform.forward * inputHandler.MovementInput.y;
 
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+        float currentSpeed = inputHandler.SprintingInput ? sprintSpeed : moveSpeed;
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 

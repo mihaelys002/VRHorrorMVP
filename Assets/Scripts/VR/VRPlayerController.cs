@@ -1,5 +1,8 @@
 using Mirror;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 public class VRPlayerController : MonoBehaviour
 {
@@ -17,18 +20,23 @@ public class VRPlayerController : MonoBehaviour
     private VRInputHandler inputHandler;
     private float verticalVelocity;
 
+
+    public void OnMove(InputValue input)
+    {
+        Debug.LogError("asdsadwas");
+    }
     private void Start()
     {
 
         inputHandler = GetComponent<VRInputHandler>();
         characterController = GetComponent<CharacterController>();
-        if (!GetComponent<NetworkIdentity>().isLocalPlayer)
-        {
-            // Disable input handling for non-local players
-            enabled = false;
-            inputHandler.enabled = false;
-            return;
-        }
+        //if (!GetComponent<NetworkIdentity>().isLocalPlayer)
+        //{
+        //    // Disable input handling for non-local players
+        //    enabled = false;
+        //    inputHandler.enabled = false;
+        //    return;
+        //}
     }
 
     private void Update()

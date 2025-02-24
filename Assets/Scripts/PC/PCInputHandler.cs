@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class PCInputHandler : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private InputAction lookAction;
-    private InputAction jumpAction;
+    public Vector2 MovementInput { get; private set; }
+    public Vector2 MouseInput { get; private set; }
+    public bool JumpInput { get; private set; }
 
-    public Vector2 MovementInput => moveAction.ReadValue<Vector2>();
-    public Vector2 MouseInput => lookAction.ReadValue<Vector2>();
-    public bool JumpInput => jumpAction.triggered;
+    public bool SprintingInput { get; private set; }
 
-    private void Awake()
+
+    public void OnMove(InputValue value)
     {
-        playerInput = GetComponent<PlayerInput>();
-
-        // Get references to actions
-        moveAction = playerInput.actions["Move"];
-        lookAction = playerInput.actions["Look"];
-        jumpAction = playerInput.actions["Jump"];
+        MovementInput = value.Get<Vector2>();
     }
+    public void OnLook(InputValue value) { MouseInput = value.Get<Vector2>(); }
+
+    public void OnJump(InputValue value) { JumpInput = value.Get<bool>(); }
+
+    public void OnSprint(InputValue value) { SprintingInput = value.Get<bool>(); }
+
+
+
 }
